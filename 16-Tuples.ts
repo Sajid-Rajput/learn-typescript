@@ -55,7 +55,10 @@ const monthThirdPayment = paystubs[2][3];
 
 // Example:5
 
-declare function calculatePayForEmployee(id:number, ...arg: [...number[]]): number;
+declare function calculatePayForEmployee(
+  id: number,
+  ...arg: [...number[]]
+): number;
 
 calculatePayForEmployee(paystubs[0][1] + paystubs[1][1] + paystubs[2][1]);
 calculatePayForEmployee(paystubs[1][2] + paystubs[2][2]);
@@ -64,7 +67,7 @@ calculatePayForEmployee(paystubs[1][2] + paystubs[2][2]);
 
 // Example:6 Rest parameters with tuple types
 
-declare function foo (...arg: [number, string, boolean]): void;
+declare function foo(...arg: [number, string, boolean]): void;
 
 // Spread expressions with tuple types
 

@@ -1,3 +1,5 @@
+import { type } from "os";
+
 let teacher = {
   name: "Zia Khan",
   experience: "Web 3.0",
@@ -84,6 +86,101 @@ if (imran.type === "Pakistani") {
 } else {
   console.log(`He is Overseas, So, we called him ${imran.nickname}`);
 }
+
+//===================================================================================================
+
+// Example 3:
+type SajidType = {
+  name: { firstname: string; lastname: string };
+  age: number;
+  teaching: boolean;
+  dob: Date;
+  certification: [...string[]];
+};
+
+let sajidDetail: SajidType = {
+  name: {
+    firstname: "Sajid",
+    lastname: "Rajput",
+  },
+  age: 21,
+  teaching: false,
+  dob: new Date(),
+  certification: ["C++", "Python", "Flask", "Machine Learning"],
+};
+console.log("🚀 ~ file: 02-Objects.ts:109 ~ sajidDetail", sajidDetail);
+
+//===================================================================================================
+
+// Example 4
+
+type Firstname = {
+  firstname: string;
+};
+type Lastname = {
+  lastname: string;
+};
+
+let fullname = { firstname: "Sajid", lastname: "Rajput" };
+
+let f_name: Firstname = fullname; // { firstname: 'Sajid', lastname: 'Rajput' }
+let l_name: Lastname = fullname; // { firstname: 'Sajid', lastname: 'Rajput' }
+
+console.log("🚀 ~ file: 02-Objects.ts:125 ~ f_name", f_name);
+console.log("🚀 ~ file: 02-Objects.ts:127 ~ l_name", l_name);
+
+//===================================================================================================
+
+// Excess Property
+type ExtraProperty = {
+  office_name: string;
+  office_pin: number;
+};
+
+let office: ExtraProperty = {
+  office_name: "Netsol",
+  office_pin: 549000,
+  // office_city: "Califonia" // Type '{ office_name: string; office_pin: number; office_city: string; }' is not assignable to type 'ExtraProperty'
+};
+
+//===================================================================================================
+
+// Union Objects
+// type book0 = {
+//   name: string;
+//   origin: string;
+//   pages: number;
+//   words?: undefined;
+// } | {
+//   name: string;
+//   origin: string;
+//   words: number;
+//   pages?: undefined;
+// }
+
+type book1 = {
+  name: string;
+  origin: string;
+  pages?: number;
+  words?: number;
+}
+
+// type book0 and type book1 work same
+
+let pendingBooks: book1 =
+  Math.random() > 0.5
+    ? {
+        name: "The Prince",
+        origin: "Italy",
+        pages: 400,
+      }
+    : {
+        name: "The Secrets of Self",
+        origin: "Pakistan",
+        words: 900000,
+      };
+
+console.log(pendingBooks.pages);
 
 //===================================================================================================
 export {};
