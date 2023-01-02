@@ -1,3 +1,5 @@
+import { log } from "console";
+
 // Example1: Named Function with REST parameter
 function eventSponsor(head: string, ...guest: string[]): string {
   return head + " " + guest.join(" ");
