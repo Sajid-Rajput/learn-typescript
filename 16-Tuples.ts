@@ -55,26 +55,28 @@ const monthThirdPayment = paystubs[2][3];
 
 // Example:5
 
-declare function calculatePayForEmployee(
-  id: number,
-  ...arg: [...number[]]
-): number;
+// declare function calculatePayForEmployee(
+//   id: number,
+//   ...arg: [...number[]]
+// ): number;
 
-calculatePayForEmployee(paystubs[0][1] + paystubs[1][1] + paystubs[2][1]);
-calculatePayForEmployee(paystubs[1][2] + paystubs[2][2]);
+// calculatePayForEmployee(paystubs[0][1], paystubs[1][1], paystubs[2][1]);
+// calculatePayForEmployee(paystubs[1][2], paystubs[2][2]);
+
+// V.V.V important Note: So in ...arg we defined the ...arg type is tuple and we need unlimited numbers arguments so we defined [...number[]]. First bracket is tuples bracket and the numbers braket number[] is because "A rest element type must be an array type"
 
 //============================================================================================
 
 // Example:6 Rest parameters with tuple types
 
-declare function foo(...arg: [number, string, boolean]): void;
+// declare function foo(...arg: [number, string, boolean]): void;
 
 // Spread expressions with tuple types
 
-const arg: [number, string, boolean] = [1, "Sajid", true];
-foo(1, "Sajid", true);
-foo(arg[0], arg[1], arg[2]);
-foo(...arg);
+// const arg: [number, string, boolean] = [1, "Sajid", true];
+// foo(1, "Sajid", true);
+// foo(arg[0], arg[1], arg[2]);
+// foo(...arg);
 
 // Note
 // When a rest parameter has a tuple type, the tuple type is expanded into a sequence of discrete parameters. For example the following two declarations are equivalent:
@@ -83,3 +85,15 @@ foo(...arg);
 // declare function foo(args_0: number, args_1: string, args_2: boolean): void;
 
 //============================================================================================
+
+// Example: 6
+
+let [preferences, name, inCountry]: [
+  string,
+  number | boolean,
+  number | boolean
+] = Math.random() > 0.5 ? ["Imran", 10, true] : ["Imran", false, 50];
+
+let preferencesTypeCheck = preferences; // string
+let nameTypeCheck = name; // number | false
+let inCountryTypeCheck = inCountry; // number | true
