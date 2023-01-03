@@ -1,62 +1,88 @@
-import { constants } from "buffer";
+// Example 1
+class Human0 {
+  name!: string;
+}
 
-// Example 1:
+let sajid = new Human0();
+console.log(typeof sajid.name); // undefined
+console.log(sajid); // Human0 { name: undefined }
+
+sajid.name = "sajid";
+console.log(typeof sajid.name); // string
+console.log(sajid); // Human0 { name: undefined }
+//============================================================================================
+
+// Example 2: Understand "this" keyword in classes
+
+console.log(this); // undefined
+
+class Human1 {
+  name!: string;
+
+  understand_this() {
+    console.log(this);
+  }
+}
+
+const p1 = new Human1();
+console.log(p1.understand_this); // [Function: understand_this]
+console.log(typeof p1.understand_this); // function
+
+p1.name = "chaudhary";
+console.log(p1); // Human1 { name: 'chaudhary' }
+console.log(typeof p1); // object
+
+//============================================================================================
+
+// Example 3
 class Point {
-  x: number;
-  y: number;
+  x = 0;
+  y = 0;
 }
 
-const pt = new Point();
-
-pt.x = 0;
-pt.y = 0;
+let pt = new Point();
+pt.x = 10;
+// pt.y = "20"; // Type 'string' is not assignable to type 'number'.
+console.log(pt);
 
 //============================================================================================
 
-// Example 2:
-class Point1 {
-  x: number = 0;
-  y: number = 0;
-}
-
-const pt1 = new Point1();
-
-// pt1.x = "90"; // Type 'string' is not assignable to type 'number'.
-pt1.x = 8;
-pt1.y = 9;
-
-console.log(`${pt1.x}, ${pt1.y}`);
-
-//============================================================================================
-
-// Example 3: class BadGreeter
-class BadGreeter {
-  name: string;
+// Example 4
+class BadGreeting {
+  // name: string; // error
   // Property 'name' has no initializer and is not definitely assigned in the constructor.
 }
 
 //============================================================================================
 
-// Example 4: class GoodGreeter
-class GoodGreeter {
+// Example 5
+class GoodGreeting {
   name: string;
 
-  constructor() {
-    this.name = "Sajid Rajput";
+  constructor(person_name: string) {
+    this.name = person_name;
+  }
+
+  greeting() {
+    console.log(`Good Morning! ${this.name}`);
   }
 }
 
+let greet = new GoodGreeting("Sajid");
+greet.greeting();
+
 //============================================================================================
 
-// Example: 5
-class OKGreet {
-  name!: string;
+// Example 6
+class OKGreeter {
   // Not initialized, but no error
+  name!: string;
 }
 
 //============================================================================================
 
-// Example: 6 Readonly
+// Example 7: Readonly
+
 class Greeter {
   readonly name: string = "Sajid";
 
@@ -65,95 +91,27 @@ class Greeter {
       this.name = othername;
     }
   }
-
-  err() {
-    //    this.name = "Not OK"; // Cannot assign to 'name' because it is a read-only property.
-  }
 }
 
-const g = new Greeter();
-// g.name = "Rajput"; // Error: Cannot assign to 'name' because it is a read-only property.
+const greet1 = new Greeter();
+console.log(greet1); // Greeter { name: 'Sajid' }
+
+const greet2 = new Greeter("Zain");
+console.log(greet2); // Greeter { name: 'Zain' }
 
 //============================================================================================
 
-// Example: 6 Constructor with default parameters
-
-class myPoint {
-  x: number;
-  y: number;
-  constructor(x = 0, y = 0) {
-    this.x = x;
-    this.y = y;
+// Example 7: Constructor Overloads
+class Point1 {
+  constructor(x: number, y: string);
+  constructor(x: string);
+  constructor(x: any, y?: string) {
+    // any code
   }
 }
 
-//============================================================================================
-
-// Example: 7
-class Panaverse {
-  name: string;
-  roll_no: number;
-  city: string;
-
-  constructor(name: string, roll_no: number, city: string) {
-    this.name = name;
-    this.roll_no = roll_no;
-    this.city = city;
-  }
-}
-
-const student1 = new Panaverse("Sajid", 70077989, "Lahore");
-const student2 = new Panaverse("Zain", 70077757, "Kasur");
-
-console.log(`${student1.name}, ${student1.roll_no}, ${student1.city}`);
-console.log(`${student2.name}, ${student2.roll_no}, ${student2.city}`);
-
-//============================================================================================
-
-// Example: 7 Constructor Overloading
-class myPoint1 {
-  // Overloads
-  constructor(x: number, y: number);
-  constructor(s: string);
-  constructor(x: any, y?: number) {
-    // code
-  }
-}
-
-//============================================================================================
-
-// Example: 8 Super Calls
-class Base {
-  k = 8;
-}
-
-class Derived extends Base {
-  constructor() {
-    super();
-    console.log(this.k);
-  }
-}
-
-const obj = new Derived();
-
-//============================================================================================
-
-// Example: 9 Getter / Setter
-class Length {
-  _measure = 0;
-
-  set measure(value: number) {
-    this._measure = value;
-  }
-
-  get measure() {
-    return this._measure;
-  }
-}
-
-let L1 = new Length();
-
-L1.measure = 555;
-console.log(L1.measure);
-
-//============================================================================================
+// const p2 = new Point1(true) // error
+// const p2 = new Point1(19); // error
+// const p2 = new Point1(19, "sajid"); // ok
+// const p2 = new Point1("ok", 19); // error
+const p2 = new Point1("ok"); // ok
