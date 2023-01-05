@@ -142,12 +142,14 @@ class GetterSetter1 {
     return this._number;
   }
 
-  set number(set_number: number) {
-    if (set_number < 5) {
+  set number(set_number: number | string | boolean) {
+    const value: number = Number(set_number);
+
+    if (!Number.isFinite(value)){
       this._number = 0;
       return;
     }
-    this._number = 10;
+    this._number = value;
   }
 }
 
